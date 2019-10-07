@@ -21,12 +21,14 @@ let pushBack (value: Film) (list: CircularList) =
             list.m_last <- node
     list.m_size <- list.m_size + 1
 
-let printList (list: CircularList) =
+let printList (list: CircularList) (outFilePath: string) =
+    System.IO.File.WriteAllText(outFilePath, "")
     let mutable current = list.m_first
     for i in 0..list.m_size - 1 do
-        printfn "%d: %s" (i + 1) (current.Value.m_value :> IGeneral).Print
+        System.IO.File.AppendAllText(outFilePath, (i + 1).ToString() + ": " + (current.Value.m_value :> IGeneral).Print
+            + System.Environment.NewLine)
         current <- current.Value.m_next
-    printfn "Number of elements: %d" list.m_size
+    System.IO.File.AppendAllText(outFilePath, "Number of elements: " + list.m_size.ToString() + System.Environment.NewLine)
 
 let sort (list: CircularList) =
     if list.m_size > 1 then
@@ -45,3 +47,23 @@ let sort (list: CircularList) =
                 n1 <- n2
                 n2 <- n2.Value.m_next
             i <- i + 1
+
+let remove (list: CircularList) =
+    if list.m_size > 0 then
+        let mutable current: Node option = list.m_first
+        let mutable previous: Node option = list.m_last
+        let mutable counter = 0
+        let startSize = list.m_size
+        while counter <> startSize do
+            if (current.Value.m_value :> IGeneral).getRating < 7.0f then
+                previous.Value.m_next <- current.Value.m_next
+                current <- previous.Value.m_next
+                if obj.ReferenceEquals(previous, list.m_last) then
+                    list.m_first <- previous.Value.m_next
+                if obj.ReferenceEquals(current, list.m_first) then
+                    list.m_last <- previous
+                list.m_size <- list.m_size - 1
+            else
+                previous <- current
+                current <- current.Value.m_next
+            counter <- counter + 1
