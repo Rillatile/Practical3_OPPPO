@@ -7,6 +7,7 @@ type FeatureFilm =
     {
         m_title: string
         m_producer: string
+        m_rating: float32
     }
 
     //override this.ToString() =
@@ -24,6 +25,7 @@ type CartoonFilm =
     {
         m_title: string
         m_type: CartoonType
+        m_rating: float32
     }
 
     //override this.ToString() =
@@ -36,6 +38,7 @@ type HorrorFilm =
     {
         m_title: string
         m_producer: string
+        m_rating: float32
     }
 
 type Film =
