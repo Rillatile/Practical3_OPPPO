@@ -24,6 +24,6 @@ let pushBack (value: Film) (list: CircularList) =
 let printList (list: CircularList) =
     let mutable current = list.m_first
     for i in 0..list.m_size - 1 do
-        printfn "%d: %s" (i + 1) (current.Value.m_value.ToString())
+        printfn "%d: %s" (i + 1) (current.Value.m_value :> IGeneral).Print
         current <- current.Value.m_next
     printfn "Number of elements: %d" list.m_size
