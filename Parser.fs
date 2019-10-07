@@ -19,4 +19,5 @@ let parse (source : string) : Film =
     match split.[1].ToLower() with
         | "feature" -> Feature({ m_title = split.[0]; m_producer = split.[2] })
         | "cartoon" -> Cartoon({ m_title = split.[0]; m_type = getType split.[2] })
+        | "horror" -> Horror({ m_title = split.[0]; m_producer = split.[2] })
         | _ -> invalidArg "source" "Incorrect type of film"

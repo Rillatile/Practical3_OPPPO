@@ -32,7 +32,14 @@ type CartoonFilm =
     //interface IPrintable with
     //    override this.Print = "Title: " + this.m_title + ", producer: " + this.m_type.ToString() + "\n"
 
+type HorrorFilm =
+    {
+        m_title: string
+        m_producer: string
+    }
+
 type Film =
     | Feature of FeatureFilm
     | Cartoon of CartoonFilm
+    | Horror of HorrorFilm
     | Incorrect
