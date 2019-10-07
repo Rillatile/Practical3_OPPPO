@@ -23,7 +23,8 @@ let main argv =
                 | ex -> printfn "Error: %s" ex.Message; Practical3.Films.Film.Incorrect
         if value <> Practical3.Films.Film.Incorrect then
             pushBack value list
-
+    
+    sort list
     printList list
 
     0
